@@ -1,0 +1,231 @@
+Enter password: ***
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 5.5.51 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database data_mahasiswa;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| data_mahasiswa     |
+| mysql              |
+| pegawai            |
+| performance_schema |
+| sekolah            |
+| test               |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use data_mahasiswa
+Database changed
+mysql> create table data_mahasiswa
+    -> (nim char (9) primary key,
+    -> nama varchar (20) not null,
+    -> alamat varchar(20) not null,
+    -> kota varchar (20) not null);
+Query OK, 0 rows affected (0.19 sec)
+
+mysql> show tables;
++--------------------------+
+| Tables_in_data_mahasiswa |
++--------------------------+
+| data_mahasiswa           |
++--------------------------+
+1 row in set (0.00 sec)
+
+mysql> desc data_mahasiswa;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| nim    | char(9)     | NO   | PRI | NULL    |       |
+| nama   | varchar(20) | NO   |     | NULL    |       |
+| alamat | varchar(20) | NO   |     | NULL    |       |
+| kota   | varchar(20) | NO   |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> alter table data_mahasiswa
+    -> add kode_pos varchar (20) not null,
+    -> add no_hp varchar (20) not null,
+    -> add jenis_kelamin varchar (20) not null,
+    -> add tgl_lahir varchar (20) not null,
+    -> add kode_dosen varchar (20) not null;
+Query OK, 0 rows affected (0.39 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc data_mahasiswa;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| nim           | char(9)     | NO   | PRI | NULL    |       |
+| nama          | varchar(20) | NO   |     | NULL    |       |
+| alamat        | varchar(20) | NO   |     | NULL    |       |
+| kota          | varchar(20) | NO   |     | NULL    |       |
+| kode_pos      | varchar(20) | NO   |     | NULL    |       |
+| no_hp         | varchar(20) | NO   |     | NULL    |       |
+| jenis_kelamin | varchar(20) | NO   |     | NULL    |       |
+| tgl_lahir     | varchar(20) | NO   |     | NULL    |       |
+| kode_dosen    | varchar(20) | NO   |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+9 rows in set (0.02 sec)
+
+mysql> insert into data_mahasiswa values
+    -> ('11223344','Ari Santoso',' ','bekasi',' ',' ','laki-laki','1998-10-12',' '),
+    -> ('11223345','Ario Talib',' ','cikarang',' ',' ','laki-laki','1999-11-16',' '),
+    -> ('11223346','Dina Marlina',' ','karawang',' ',' ','perempuan','1997-12-01',' '),
+    -> ('11223347','Lisa Ayu',' ','bekasi',' ',' ','perempuan','1996-01-02',' '),
+    -> ('11223348','Tiara Wahidah',' ','bekasi',' ',' ','perempuan','1980-02-05',' '),
+    -> ('11223349','Anton Sinaga',' ','cikarang',' ',' ','laki laki','1988-03-10',' ');
+Query OK, 6 rows affected (0.12 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> select * from data_mahasiswa;
++----------+---------------+--------+----------+----------+-------+---------------+------------+------------+
+| nim      | nama          | alamat | kota     | kode_pos | no_hp | jenis_kelamin | tgl_lahir  | kode_dosen |
++----------+---------------+--------+----------+----------+-------+---------------+------------+------------+
+| 11223344 | Ari Santoso   |        | bekasi   |          |       | laki-laki     | 1998-10-12 |            |
+| 11223345 | Ario Talib    |        | cikarang |          |       | laki-laki     | 1999-11-16 |            |
+| 11223346 | Dina Marlina  |        | karawang |          |       | perempuan     | 1997-12-01 |            |
+| 11223347 | Lisa Ayu      |        | bekasi   |          |       | perempuan     | 1996-01-02 |            |
+| 11223348 | Tiara Wahidah |        | bekasi   |          |       | perempuan     | 1980-02-05 |            |
+| 11223349 | Anton Sinaga  |        | cikarang |          |       | laki laki     | 1988-03-10 |            |
++----------+---------------+--------+----------+----------+-------+---------------+------------+------------+
+6 rows in set (0.00 sec)
+
+mysql> update data_mahasiswa set tgl_lahir='1979-08-31' where nim=11223344;
+Query OK, 1 row affected (0.19 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from data_mahasiswa;
++----------+---------------+--------+----------+----------+-------+---------------+------------+------------+
+| nim      | nama          | alamat | kota     | kode_pos | no_hp | jenis_kelamin | tgl_lahir  | kode_dosen |
++----------+---------------+--------+----------+----------+-------+---------------+------------+------------+
+| 11223344 | Ari Santoso   |        | bekasi   |          |       | laki-laki     | 1979-08-31 |            |
+| 11223345 | Ario Talib    |        | cikarang |          |       | laki-laki     | 1999-11-16 |            |
+| 11223346 | Dina Marlina  |        | karawang |          |       | perempuan     | 1997-12-01 |            |
+| 11223347 | Lisa Ayu      |        | bekasi   |          |       | perempuan     | 1996-01-02 |            |
+| 11223348 | Tiara Wahidah |        | bekasi   |          |       | perempuan     | 1980-02-05 |            |
+| 11223349 | Anton Sinaga  |        | cikarang |          |       | laki laki     | 1988-03-10 |            |
++----------+---------------+--------+----------+----------+-------+---------------+------------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from data_mahasiswa
+    -> where nim=11223344;
++----------+-------------+--------+--------+----------+-------+---------------+------------+------------+
+| nim      | nama        | alamat | kota   | kode_pos | no_hp | jenis_kelamin | tgl_lahir  | kode_dosen |
++----------+-------------+--------+--------+----------+-------+---------------+------------+------------+
+| 11223344 | Ari Santoso |        | bekasi |          |       | laki-laki     | 1979-08-31 |            |
++----------+-------------+--------+--------+----------+-------+---------------+------------+------------+
+1 row in set (0.10 sec)
+
+mysql> delete from data_mahasiswa where nim 11223346;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '11223346' at line 1
+mysql> delete from data_mahasiswa where nim=11223346;
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select * from data_mahasiswa;
++----------+---------------+--------+----------+----------+-------+---------------+------------+------------+
+| nim      | nama          | alamat | kota     | kode_pos | no_hp | jenis_kelamin | tgl_lahir  | kode_dosen |
++----------+---------------+--------+----------+----------+-------+---------------+------------+------------+
+| 11223344 | Ari Santoso   |        | bekasi   |          |       | laki-laki     | 1979-08-31 |            |
+| 11223345 | Ario Talib    |        | cikarang |          |       | laki-laki     | 1999-11-16 |            |
+| 11223347 | Lisa Ayu      |        | bekasi   |          |       | perempuan     | 1996-01-02 |            |
+| 11223348 | Tiara Wahidah |        | bekasi   |          |       | perempuan     | 1980-02-05 |            |
+| 11223349 | Anton Sinaga  |        | cikarang |          |       | laki laki     | 1988-03-10 |            |
++----------+---------------+--------+----------+----------+-------+---------------+------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select nama, tgl_lahir from data_mahasiswa
+    -> where tgl_lahir>='1996-01-02'
+    -> order by nama;
++------------+------------+
+| nama       | tgl_lahir  |
++------------+------------+
+| Ario Talib | 1999-11-16 |
+| Lisa Ayu   | 1996-01-02 |
++------------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select nama, kota, jenis_kelamin from data_mahasiswa
+    -> where kota='bekasi'
+    -> AND jenis_kelamin='perempuan';
++---------------+--------+---------------+
+| nama          | kota   | jenis_kelamin |
++---------------+--------+---------------+
+| Lisa Ayu      | bekasi | perempuan     |
+| Tiara Wahidah | bekasi | perempuan     |
++---------------+--------+---------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from data_mahasiswa
+    -> where kota='bekasi' and jenis_kelamin='laki-laki'
+    -> or tgl_lahir <='1997' and jenis_kelamin='perempuan'
+    -> order by nama;
++----------+---------------+--------+--------+----------+-------+---------------+------------+------------+
+| nim      | nama          | alamat | kota   | kode_pos | no_hp | jenis_kelamin | tgl_lahir  | kode_dosen |
++----------+---------------+--------+--------+----------+-------+---------------+------------+------------+
+| 11223344 | Ari Santoso   |        | bekasi |          |       | laki-laki     | 1979-08-31 |            |
+| 11223347 | Lisa Ayu      |        | bekasi |          |       | perempuan     | 1996-01-02 |            |
+| 11223348 | Tiara Wahidah |        | bekasi |          |       | perempuan     | 1980-02-05 |            |
++----------+---------------+--------+--------+----------+-------+---------------+------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select nama, alamat from data_mahasiswa;
++---------------+--------+
+| nama          | alamat |
++---------------+--------+
+| Ari Santoso   |        |
+| Ario Talib    |        |
+| Lisa Ayu      |        |
+| Tiara Wahidah |        |
+| Anton Sinaga  |        |
++---------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select * from data_mahasiswa
+    -> order by nama asc;
++----------+---------------+--------+----------+----------+-------+---------------+------------+------------+
+| nim      | nama          | alamat | kota     | kode_pos | no_hp | jenis_kelamin | tgl_lahir  | kode_dosen |
++----------+---------------+--------+----------+----------+-------+---------------+------------+------------+
+| 11223349 | Anton Sinaga  |        | cikarang |          |       | laki laki     | 1988-03-10 |            |
+| 11223344 | Ari Santoso   |        | bekasi   |          |       | laki-laki     | 1979-08-31 |            |
+| 11223345 | Ario Talib    |        | cikarang |          |       | laki-laki     | 1999-11-16 |            |
+| 11223347 | Lisa Ayu      |        | bekasi   |          |       | perempuan     | 1996-01-02 |            |
+| 11223348 | Tiara Wahidah |        | bekasi   |          |       | perempuan     | 1980-02-05 |            |
++----------+---------------+--------+----------+----------+-------+---------------+------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select nama, tgl_lahir from data_mahasiswa
+    -> where tgl_lahir BETWEEN'1980-02-03' AND '1988-03-10'
+    -> ORDER BY NAMA;
++---------------+------------+
+| nama          | tgl_lahir  |
++---------------+------------+
+| Anton Sinaga  | 1988-03-10 |
+| Tiara Wahidah | 1980-02-05 |
++---------------+------------+
+2 rows in set (0.12 sec)
+
+mysql> select nama, tgl_lahir from data_mahasiswa
+    -> where tgl_lahir >='1980-02-03' AND tgl_lahir <='1988-03-10';
++---------------+------------+
+| nama          | tgl_lahir  |
++---------------+------------+
+| Tiara Wahidah | 1980-02-05 |
+| Anton Sinaga  | 1988-03-10 |
++---------------+------------+
+2 rows in set (0.00 sec)
+
+mysql>
