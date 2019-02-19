@@ -1,0 +1,215 @@
+Enter password: ***
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 28
+Server version: 5.5.51 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database sewamobil;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sekolah            |
+| sewamobil          |
+| test               |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> use sewamobil;
+Database changed
+mysql> create table mobil
+    -> (kode char (15) primary key,
+    -> jenis varchar (20) not null,
+    -> merk varchar (20) not null,
+    -> tarif varchar (20) not null,
+    -> nopol varchar (20) not null);
+Query OK, 0 rows affected (0.27 sec)
+
+mysql> desc mobil;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| kode  | char(15)    | NO   | PRI | NULL    |       |
+| jenis | varchar(20) | NO   |     | NULL    |       |
+| merk  | varchar(20) | NO   |     | NULL    |       |
+| tarif | varchar(20) | NO   |     | NULL    |       |
+| nopol | varchar(20) | NO   |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+mysql>  insert into mobil values
+    -> ('M001','SEDAN','BMW ES','500000','BG1234AA'),
+    -> ('M002','SEDAN','HONDA CRV','350000','BG2345BB'),
+    -> ('M003','BUS','MERCEDEZ','1000000','BG3456CC'),
+    -> ('M004','BUS','DYNA','800000','BG8443DD'),
+    -> ('M005','TRUCK','HYNO ZX','1500000','BG4638EE'),
+    -> ('M006','TRUCK','DYNA X1','1500000','BG8473FF');
+Query OK, 6 rows affected (0.12 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> select * from mobil;
++------+-------+-----------+---------+----------+
+| kode | jenis | merk      | tarif   | nopol    |
++------+-------+-----------+---------+----------+
+| M001 | SEDAN | BMW ES    | 500000  | BG1234AA |
+| M002 | SEDAN | HONDA CRV | 350000  | BG2345BB |
+| M003 | BUS   | MERCEDEZ  | 1000000 | BG3456CC |
+| M004 | BUS   | DYNA      | 800000  | BG8443DD |
+| M005 | TRUCK | HYNO ZX   | 1500000 | BG4638EE |
+| M006 | TRUCK | DYNA X1   | 1500000 | BG8473FF |
++------+-------+-----------+---------+----------+
+6 rows in set (0.00 sec)
+
+mysql> create table pelanggan
+    -> (kode char (15) primary key,
+    -> nama varchar (20) not null,
+    -> kontak varchar (20) not null,
+    -> alamat varchar (30) not null,
+    -> kota varchar (20) not null,
+    -> kodepos varchar (20) not null,
+    -> telepon varchar (20) not null);
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> desc pelanggan;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| kode    | char(15)    | NO   | PRI | NULL    |       |
+| nama    | varchar(20) | NO   |     | NULL    |       |
+| kontak  | varchar(20) | NO   |     | NULL    |       |
+| alamat  | varchar(30) | NO   |     | NULL    |       |
+| kota    | varchar(20) | NO   |     | NULL    |       |
+| kodepos | varchar(20) | NO   |     | NULL    |       |
+| telepon | varchar(20) | NO   |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+7 rows in set (0.02 sec)
+
+mysql> insert into pelanggan values
+    -> ('P001','PT FOX RIVER','HENDRA','JL. JEND. SUDIRMAN 657','BENGKULU','30245','1234567'),
+    -> ('P002','PT FOXCON','IWAN','JL. WAHID HASYIM 743','JAKARTA','73429','234567'),
+    -> ('P003','PT FARMACON','YANI','JL. AHMAD DAHLAN 45','LAMPUNG','28349','3334445');
+Query OK, 3 rows affected (0.05 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from pelanggan;
++------+--------------+--------+------------------------+----------+---------+---------+
+| kode | nama         | kontak | alamat                 | kota     | kodepos | telepon |
++------+--------------+--------+------------------------+----------+---------+---------+
+| P001 | PT FOX RIVER | HENDRA | JL. JEND. SUDIRMAN 657 | BENGKULU | 30245   | 1234567 |
+| P002 | PT FOXCON    | IWAN   | JL. WAHID HASYIM 743   | JAKARTA  | 73429   | 234567  |
+| P003 | PT FARMACON  | YANI   | JL. AHMAD DAHLAN 45    | LAMPUNG  | 28349   | 3334445 |
++------+--------------+--------+------------------------+----------+---------+---------+
+3 rows in set (0.00 sec)
+
+mysql> create table sewa
+    -> (nofaktur_sewa varchar (20) not null,
+    -> kode_pelanggan varchar (20) not null);
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> drop table sewa;
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> create table sewa
+    -> (nofaktursewa varchar (20) not null,
+    -> kodepelanggan varchar (20) not null);
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> alter table sewa
+    -> add tglsewa varchar (20) not null,
+    -> add kodemobil varchar (20) not null,
+    -> add lamasewa varchar (20) not null,
+    -> add uangmuka varchar (20) not null;
+Query OK, 0 rows affected (0.26 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc sewa;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| nofaktursewa  | varchar(20) | NO   |     | NULL    |       |
+| kodepelanggan | varchar(20) | NO   |     | NULL    |       |
+| tglsewa       | varchar(20) | NO   |     | NULL    |       |
+| kodemobil     | varchar(20) | NO   |     | NULL    |       |
+| lamasewa      | varchar(20) | NO   |     | NULL    |       |
+| uangmuka      | varchar(20) | NO   |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+6 rows in set (0.02 sec)
+
+mysql> insert into sewa values
+    -> ('F001','P001','2008-12-01','M001','2','200000'),
+    -> ('F001','P001','2008-12-01','M003','2','200000'),
+    -> ('F002','P002','2008-12-02','M002','1','100000');
+Query OK, 3 rows affected (0.14 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from sewa;
++--------------+---------------+------------+-----------+----------+----------+
+| nofaktursewa | kodepelanggan | tglsewa    | kodemobil | lamasewa | uangmuka |
++--------------+---------------+------------+-----------+----------+----------+
+| F001         | P001          | 2008-12-01 | M001      | 2        | 200000   |
+| F001         | P001          | 2008-12-01 | M003      | 2        | 200000   |
+| F002         | P002          | 2008-12-02 | M002      | 1        | 100000   |
++--------------+---------------+------------+-----------+----------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select mobil.kode, mobil.jenis, mobil.merk, sewa.nofaktursewa, sewa.tglsewa, sewa.lamasewa
+    -> from mobil
+    -> eft join sewa
+    -> on mobil.kode=sewa.kodemobil;
+ERROR 1054 (42S22): Unknown column 'mobil.kode' in 'field list'
+mysql> select mobil.kode, mobil.jenis, mobil.merk, sewa.nofaktursewa, sewa.tglsewa, sewa.lamasewa
+    -> from mobil
+    -> left join sewa
+    -> on mobil.kode=sewa.kodemobil;
++------+-------+-----------+--------------+------------+----------+
+| kode | jenis | merk      | nofaktursewa | tglsewa    | lamasewa |
++------+-------+-----------+--------------+------------+----------+
+| M001 | SEDAN | BMW ES    | F001         | 2008-12-01 | 2        |
+| M002 | SEDAN | HONDA CRV | F002         | 2008-12-02 | 1        |
+| M003 | BUS   | MERCEDEZ  | F001         | 2008-12-01 | 2        |
+| M004 | BUS   | DYNA      | NULL         | NULL       | NULL     |
+| M005 | TRUCK | HYNO ZX   | NULL         | NULL       | NULL     |
+| M006 | TRUCK | DYNA X1   | NULL         | NULL       | NULL     |
++------+-------+-----------+--------------+------------+----------+
+6 rows in set (0.00 sec)
+
+mysql> select sewa.nofaktursewa, pelanggan.nama, sewa.tglsewa, mobil.jenis, mobil.merk, sewa.lamasewa, sewa.uangmuka
+    -> from mobil
+    -> inner join sewa on mobil.kode=sewa.kodemobil
+    -> inner join pelanggan on sewa.kodepelanggan=pelanggan.kode;
++--------------+--------------+------------+-------+-----------+----------+----------+
+| nofaktursewa | nama         | tglsewa    | jenis | merk      | lamasewa | uangmuka |
++--------------+--------------+------------+-------+-----------+----------+----------+
+| F001         | PT FOX RIVER | 2008-12-01 | SEDAN | BMW ES    | 2        | 200000   |
+| F001         | PT FOX RIVER | 2008-12-01 | BUS   | MERCEDEZ  | 2        | 200000   |
+| F002         | PT FOXCON    | 2008-12-02 | SEDAN | HONDA CRV | 1        | 100000   |
++--------------+--------------+------------+-------+-----------+----------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select pelanggan.nama, pelanggan.kota, sewa.nofaktursewa, sewa.tglsewa, sewa.kodemobil, sewa.lamasewa, sewa.uangmuka
+    -> from pelanggan
+    -> left join sewa
+    -> on pelanggan.kode=sewa.kodepelanggan;
++--------------+----------+--------------+------------+-----------+----------+----------+
+| nama         | kota     | nofaktursewa | tglsewa    | kodemobil | lamasewa | uangmuka |
++--------------+----------+--------------+------------+-----------+----------+----------+
+| PT FOX RIVER | BENGKULU | F001         | 2008-12-01 | M001      | 2        | 200000   |
+| PT FOX RIVER | BENGKULU | F001         | 2008-12-01 | M003      | 2        | 200000   |
+| PT FOXCON    | JAKARTA  | F002         | 2008-12-02 | M002      | 1        | 100000   |
+| PT FARMACON  | LAMPUNG  | NULL         | NULL       | NULL      | NULL     | NULL     |
++--------------+----------+--------------+------------+-----------+----------+----------+
+4 rows in set (0.00 sec)
+
+mysql>
